@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.groovy.template.GroovyTemplateAuto
 import org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration
 import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration
 import org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration
-import org.springframework.boot.context.embedded.FilterRegistrationBean
-import org.springframework.boot.context.web.SpringBootServletInitializer
+import org.springframework.boot.web.servlet.FilterRegistrationBean
+import org.springframework.boot.web.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration

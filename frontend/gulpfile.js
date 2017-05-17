@@ -22,8 +22,6 @@ var basePaths = {
   dependency:'bower_components/'
 }
 
-
-
 gulp.task('change-src', function () {
   browserSync.reload();
 });
