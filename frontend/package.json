@@ -1,51 +1,18 @@
 {
-  "name": "angular-spring-security-auth-sample",
-  "version": "3.0.0",
-  "description": "angular-spring-security-auth-sample",
-  "main": "index.js",
-  "scripts": {
-    "test": "gulp test"
+  "name": "react-spring-security-auth-sample",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lennonjesus/angular-spring-security.git"
-  },
-  "keywords": [
-    "angularjs",
-    "spring-security",
-    "rest",
-    "auth"
-  ],
-  "author": "Lennon Jesus <lennon.jesus@gmail.com>",
-  "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.10.0",
-    "del": "^2.2.2",
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-html-replace": "^1.5.5",
-    "gulp-if": "^2.0.0",
-    "gulp-inject": "^3.0.0",
-    "gulp-jshint": "^2.0.0",
-    "gulp-minify-css": "^1.2.2",
-    "gulp-minify-html": "^1.0.4",
-    "gulp-uglify": "^1.5.1",
-    "gulp-usemin": "^0.3.16",
-    "gulp-useref": "^3.0.3",
-    "jasmine-core": "^2.5.2",
-    "jshint": "^2.8.0",
-    "jshint-stylish": "^2.1.0",
-    "karma": "^1.3.0",
-    "karma-coverage": "^1.1.1",
-    "karma-jasmine": "^1.0.2",
-    "karma-phantomjs-launcher": "^1.0.2",
-    "proxy-middleware": "^0.15.0",
-    "wiredep": "^2.2.2"
+    "react-scripts": "1.0.7"
   },
-  "bugs": {
-    "url": "https://github.com/lennonjesus/angular-spring-security-auth-sample/issues"
-  },
-  "homepage": "https://github.com/lennonjesus/angular-spring-security-auth-sample#readme"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }
