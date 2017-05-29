@@ -1,24 +1,51 @@
 import React, { Component } from 'react';
 import './App.css';
+import OutroComponent from '../OutroComponent/OutroComponent';
+import LoginComponent from '../LoginComponent/LoginComponent';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: true,
+      isLoggedIn: false,
+      currentScreen : null
     }
+  }
+
+  handleClick(event, component) {
+    this.setState({ currentScreen: component});
+  }
+
+  handleIsLoggedInChange = (isLoggedIn) => {
+    this.setState({ isLoggedIn });
+    this.setState({ currentScreen: null });
   }
 
   recuperaLinks(isLoggedIn) {
 
     let links = [];
     if (isLoggedIn) {
-      links.push(<li key="logout" role="presentation"><a><strong>LOGOUT</strong></a></li>);
-      links.push(<li key="outro" role="presentation"><a><strong>OUTRO</strong></a></li>);
+      let link = <li key="logout" role="presentation">
+        <a href="#" onClick={(e) => this.handleIsLoggedInChange(false)}>
+          <strong>LOGOUT</strong>
+        </a>
+      </li>;
+      links.push(link);
+      link = <li key="outro" role="presentation">
+        <a href="#" onClick={(e) => this.handleClick(e, <OutroComponent />)}>
+          <strong>OUTRO</strong>
+        </a>
+      </li>;
+      links.push(link);
 
     } else {
-      links.push(<li key="login" role="presentation"><a><strong>LOGIN</strong></a></li>);
+      let link = <li key="login" role="presentation">
+        <a href="#" onClick={(e) => this.handleClick(e, <LoginComponent handleIsLoggedInChange={this.handleIsLoggedInChange} />)}>
+          <strong>LOGIN</strong>
+        </a>
+      </li>;
+      links.push(link);
     }
 
     return links;
@@ -34,7 +61,7 @@ class App extends Component {
               <div className="container-fluid">
                 <div className="collapse navbar-collapse">
                   <ul className="nav nav-pills">
-                  <li role="presentation"><a><strong>HOME</strong></a></li>
+                  <li role="presentation"><a href="#"><strong>HOME</strong></a></li>
                   {this.recuperaLinks(this.state.isLoggedIn).map((link) =>
                    link
                   )}
@@ -44,7 +71,9 @@ class App extends Component {
           </nav>
           <br/><br/><br/>
           </div>
-      <div className="container"></div>
+        <div className="container">
+          {this.state.currentScreen}
+        </div>
   </div>
     );
   }
