@@ -5,15 +5,15 @@ class LoginComponent extends Component {
 
   constructor(props) {
     super(props);
-    this.onHandleSubmit = this.onHandleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.loginService = new LoginService();
   }
 
-  onHandleSubmit(event) {
+  handleSubmit(event) {
     event.preventDefault()
     this.loginService.login("admin", "admin")
-    .then( () => {
-      this.props.handleIsLoggedInChange(true)
+      .then(() => {
+      this.props.handleIsLoggedInChange(true);
     }).catch( (error) => {
       console.log(error);
     });
@@ -32,7 +32,7 @@ class LoginComponent extends Component {
         <div className="panel-heading text-center">
           <h3 className="text-primary">Login</h3>
         </div>
-        <form role="form" onSubmit={this.onHandleSubmit}>
+        <form role="form" onSubmit={this.handleSubmit}>
 
           <div className="panel-body">
             <div className="form-group">

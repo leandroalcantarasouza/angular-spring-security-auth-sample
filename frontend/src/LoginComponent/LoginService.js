@@ -6,7 +6,6 @@ export default class LoginService {
 
         let headers = new Headers();
         let basicAuth = `Basic ${this.generateUsernamePasswordBase64(username, password)}`;
-        console.log(basicAuth);
         headers.append("authorization", basicAuth);
 
         var request = {
@@ -15,13 +14,27 @@ export default class LoginService {
             mode: 'cors',
             cache: 'default'
         };
-        return fetch(Constants.API_LOGIN_ENDPOINT, request).then((response) => {
-            if (response.ok) {
-                console.log("logado");
-            } else {
-                throw new Error("erro");
-            }
-        });
+        return fetch(Constants.API_LOGIN_ENDPOINT, request)
+            .then((response) => {
+                if (response.ok) {
+                    console.log("logado");
+                } else {
+                    throw new Error("erro");
+                }
+            });
+    }
+
+    logout() {
+        return fetch('/sample/api/logout', { method: 'POST' })
+            .then((response) => this.getLogoutSuccess(response));
+    }
+
+    getLogoutSuccess = (response) => {
+        if (response.ok) {
+            console.log("saiu");
+        } else {
+            throw new Error("erro");
+        }
     }
 
     generateUsernamePasswordBase64(username, password) {

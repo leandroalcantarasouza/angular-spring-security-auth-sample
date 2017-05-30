@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 import OutroComponent from '../OutroComponent/OutroComponent';
 import LoginComponent from '../LoginComponent/LoginComponent';
+import LogoutComponent from '../LogoutComponent/LogoutComponent';
+import HomeComponent from '../HomeComponent/HomeComponent';
 
 class App extends Component {
 
@@ -9,34 +10,35 @@ class App extends Component {
     super(props);
     this.state = {
       isLoggedIn: false,
-      currentScreen : null
+      currentScreen: <HomeComponent isLoggedIn={false}/>
     }
   }
 
-  handleClick(event, component) {
-    this.setState({ currentScreen: component});
+   handleClick(event, component) {
+    this.setState({ currentScreen: component });
   }
 
   handleIsLoggedInChange = (isLoggedIn) => {
     this.setState({ isLoggedIn });
-    this.setState({ currentScreen: null });
+    this.setState({ currentScreen: <HomeComponent isLoggedIn={this.state.isLoggedIn}/> });
   }
 
   recuperaLinks(isLoggedIn) {
 
     let links = [];
+    let link;
+    links.push(<li key="home" role="presentation"><a onClick={(e) => this.handleClick(e, <HomeComponent isLoggedIn={this.state.isLoggedIn} />)} href="#"><strong>HOME</strong></a></li>);
+
     if (isLoggedIn) {
-      let link = <li key="logout" role="presentation">
-        <a href="#" onClick={(e) => this.handleIsLoggedInChange(false)}>
-          <strong>LOGOUT</strong>
-        </a>
-      </li>;
-      links.push(link);
+
       link = <li key="outro" role="presentation">
         <a href="#" onClick={(e) => this.handleClick(e, <OutroComponent />)}>
           <strong>OUTRO</strong>
         </a>
       </li>;
+      links.push(link);
+
+      link = <LogoutComponent key="logout" handleIsLoggedInChange={(e) => this.handleIsLoggedInChange(e, false)} />;
       links.push(link);
 
     } else {
@@ -61,7 +63,6 @@ class App extends Component {
               <div className="container-fluid">
                 <div className="collapse navbar-collapse">
                   <ul className="nav nav-pills">
-                  <li role="presentation"><a href="#"><strong>HOME</strong></a></li>
                   {this.recuperaLinks(this.state.isLoggedIn).map((link) =>
                    link
                   )}
