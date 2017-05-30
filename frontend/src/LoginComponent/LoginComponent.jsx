@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
+import LoginService from '../LoginComponent/LoginService';
 
 class LoginComponent extends Component {
 
   constructor(props) {
     super(props);
     this.onHandleSubmit = this.onHandleSubmit.bind(this);
+    this.loginService = new LoginService();
   }
 
   onHandleSubmit(event) {
-    event.preventDefault();
-    this.props.handleIsLoggedInChange(true);
+    event.preventDefault()
+    this.loginService.login("admin", "admin")
+    .then( () => {
+      this.props.handleIsLoggedInChange(true)
+    }).catch( (error) => {
+      console.log(error);
+    });
+
   }
 
   render() {
