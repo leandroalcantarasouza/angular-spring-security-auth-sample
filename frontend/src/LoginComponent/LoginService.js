@@ -12,7 +12,8 @@ export default class LoginService {
             method: 'POST',
             headers: headers,
             mode: 'cors',
-            cache: 'default'
+            cache: 'default',
+            credentials: 'include'
         };
         return fetch(Constants.API_LOGIN_ENDPOINT, request)
             .then((response) => {
@@ -25,12 +26,12 @@ export default class LoginService {
     }
 
     logout() {
-        return fetch(Constants.API_LOGOUT_ENDPOINT, { method: 'POST' })
+        return fetch(Constants.API_LOGOUT_ENDPOINT, { method: 'POST', credentials: 'include' })
             .then((response) => this.getLogoutSuccess(response));
     }
 
     getResource() {
-        return fetch(Constants.API_GET_RESOURCE).then((response) => {
+        return fetch(Constants.API_GET_RESOURCE, { credentials: 'include' }).then((response) => {
             if (response.ok) {
                 return response.json();
             } else {

@@ -7,7 +7,7 @@ class HomeComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Greeting: null
+      Greeting: {}
     }
     this.loginService = new LoginService();
   }
@@ -31,9 +31,9 @@ class HomeComponent extends Component {
 
     const loggedInMessage = <div className="text-center text-info">principal
         <br/>
-        <p>Hello</p>
-        <p>The ID is</p>
-        <p>The content is</p>
+        <p>Hello </p>
+        <p>The ID is {this.state.Greeting.id}</p>
+        <p>The content is {this.state.Greeting.content}</p>
       </div>
 
     let mensagemLogin = this.props.isLoggedIn ? loggedInMessage : notLoggedInMessage
