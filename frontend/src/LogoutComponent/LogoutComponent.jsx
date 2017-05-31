@@ -20,7 +20,7 @@ class LogoutComponent extends Component {
   render() {
 
     return (
-      <li role="presentation"><a href="#" onClick={this.handleClick}>
+      <li role="presentation"><a href="javascript:void(0)" onClick={this.handleClick}>
         <strong>LOGOUT</strong>
       </a></li>
     );

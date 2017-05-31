@@ -10,7 +10,7 @@ class LoginMenuComponent extends Component {
 
   handleClick(event) {
     event.preventDefault()
-    this.props.handleClick(<LoginComponent handleIsLoggedInChange={this.props.handleIsLoggedInChange}/>, "login");
+    this.props.handleClick("login");
   }
 
   render() {
@@ -19,7 +19,7 @@ class LoginMenuComponent extends Component {
 
     return (
       <li role="presentation" className={selected}>
-        <a href="#" onClick={this.handleClick}>
+        <a href="javascript:void(0)" onClick={this.handleClick}>
           <strong>LOGIN</strong>
         </a>
       </li>

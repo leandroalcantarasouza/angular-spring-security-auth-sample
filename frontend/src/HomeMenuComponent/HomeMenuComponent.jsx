@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import HomeComponent from '../HomeComponent/HomeComponent';
 
 class HomeMenuComponent extends Component {
 
@@ -10,7 +9,7 @@ class HomeMenuComponent extends Component {
 
   handleClick(event) {
     event.preventDefault()
-    this.props.handleClick(<HomeComponent isLoggedIn={this.props.isLoggedIn}/>, "home");
+    this.props.handleClick("home");
   }
 
   render() {
@@ -18,7 +17,7 @@ class HomeMenuComponent extends Component {
     let selected = "home" === this.props.selectedItem ? "active" : "";
 
     return (
-      <li role="presentation" className={selected}><a onClick={this.handleClick} href="#"><strong>HOME</strong></a></li>
+      <li role="presentation" className={selected}><a onClick={this.handleClick} href="javascript:void(0)"><strong>HOME</strong></a></li>
     );
   }
 }

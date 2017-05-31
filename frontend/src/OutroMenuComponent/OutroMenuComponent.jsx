@@ -10,7 +10,7 @@ class OutroMenuComponent extends Component {
 
   handleClick(event) {
     event.preventDefault()
-    this.props.handleClick(<OutroComponent />, "outro");
+    this.props.handleClick("outro");
   }
 
   render() {
@@ -18,7 +18,7 @@ class OutroMenuComponent extends Component {
     let selected = "outro" === this.props.selectedItem ? "active" : "";
 
     return (
-      <li role="presentation" className={selected}><a onClick={this.handleClick} href="#"><strong>OUTRO</strong></a></li>
+      <li role="presentation" className={selected}><a onClick={this.handleClick} href="javascript:void(0)"><strong>OUTRO</strong></a></li>
     );
   }
 }

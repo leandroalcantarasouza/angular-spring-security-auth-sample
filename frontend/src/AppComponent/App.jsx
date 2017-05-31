@@ -14,73 +14,40 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
       principal: '',
-      selectedItem: 'home',
-      currentScreen: <HomeComponent isLoggedIn={false}/>
+      selectedItem: 'home'
     }
   }
 
-   handleClick(event, component, menuItem) {
-     this.setState({ selectedItem: menuItem, currentScreen: component });
-   }
-
-   handleMenuItemClick = (component, menuItem) => {
-     this.setState({ selectedItem: menuItem, currentScreen: component});
+   handleMenuItemClick = (menuItem) => {
+     this.setState({ selectedItem: menuItem});
   }
 
    handleIsLoggedInChange = (isLoggedIn, principal) => {
     this.setState({
       isLoggedIn : isLoggedIn,
       principal : principal,
-      selectedItem: 'home',
-      currentScreen: <HomeComponent isLoggedIn={isLoggedIn} principal={principal} />
+      selectedItem: 'home'
     });
   }
 
   recuperaLinks(isLoggedIn) {
 
     let links = [];
-    let link;
-    //links.push(<li key="home" role="presentation" className="active"><a onClick={(e) => this.handleClick(e, <HomeComponent isLoggedIn={this.state.isLoggedIn} />)} href="#"><strong>HOME</strong></a></li>);
-    links.push(<HomeMenuComponent key="home" handleClick={this.handleMenuItemClick} isLoggedIn={this.state.isLoggedIn} selectedItem={this.state.selectedItem} principal={this.state.principal}/>);
+    links.push(<HomeMenuComponent key="home" handleClick={this.handleMenuItemClick} selectedItem={this.state.selectedItem}/>);
 
     if (isLoggedIn) {
 
       links.push(<OutroMenuComponent key="outro" handleClick={this.handleMenuItemClick} selectedItem={this.state.selectedItem}/>);
-      /*link = <li key="outro" role="presentation">
-        <a href="#" onClick={(e) => this.handleClick(e, <OutroComponent />)}>
-          <strong>OUTRO</strong>
-        </a>
-      </li>;*/
-      links.push(link);
-
-      link = <LogoutComponent key="logout" handleClick={this.handleIsLoggedInChange} />;
-      links.push(link);
+      links.push(<LogoutComponent key="logout" handleClick={this.handleIsLoggedInChange} />);
 
     } else {
-      links.push(<LoginMenuComponent key="login" handleIsLoggedInChange={this.handleIsLoggedInChange} handleClick={this.handleMenuItemClick} selectedItem={this.state.selectedItem} />);
-      /*let link = <li key="login" role="presentation">
-        <a href="#" onClick={(e) => this.handleClick(e, <LoginComponent handleIsLoggedInChange={this.handleIsLoggedInChange} />)}>
-          <strong>LOGIN</strong>
-        </a>
-      </li>;*/
-      links.push(link);
+      links.push(<LoginMenuComponent key="login" handleClick={this.handleMenuItemClick} selectedItem={this.state.selectedItem} />);
     }
 
     return links;
   }
 
   render() {
-
-    <div>
-      {this.state.currentPath === 'home' && <HomeComponent />}
-      {this.state.currentPath === 'login' && <LoginComponent />}
-      {/*<Route path="home" current={this.state.currentPath}>
-        <HomeComponent />
-      </Route>
-      <Route path="login" current={this.state.currentPath}>
-        <LoginComponent />
-      </Route>*/}
-    </div>
 
     return (
       <div className="totalContentWrapper" id="outer">
@@ -100,7 +67,9 @@ class App extends Component {
           <br/><br/><br/>
           </div>
         <div className="container">
-          {this.state.currentScreen}
+          {this.state.selectedItem === 'home' && <HomeComponent isLoggedIn={this.state.isLoggedIn} principal={this.state.principal} />}
+          {this.state.selectedItem === 'login' && <LoginComponent handleIsLoggedInChange={this.handleIsLoggedInChange} />}
+          {this.state.selectedItem === 'outro' && <OutroComponent />}
         </div>
   </div>
     );
