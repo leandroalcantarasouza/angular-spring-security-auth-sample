@@ -10,6 +10,7 @@ class App extends Component {
     super(props);
     this.state = {
       isLoggedIn: false,
+      principal: '',
       currentScreen: <HomeComponent isLoggedIn={false}/>
     }
   }
@@ -18,9 +19,10 @@ class App extends Component {
     this.setState({ currentScreen: component });
   }
 
-  handleIsLoggedInChange = (isLoggedIn) => {
+  handleIsLoggedInChange = (isLoggedIn, principal) => {
     this.setState({ isLoggedIn });
-    this.setState({ currentScreen: <HomeComponent isLoggedIn={this.state.isLoggedIn}/> });
+    this.setState({ principal });
+    this.setState({ currentScreen: <HomeComponent isLoggedIn={this.state.isLoggedIn} principal={this.state.principal}/>});
   }
 
   recuperaLinks(isLoggedIn) {

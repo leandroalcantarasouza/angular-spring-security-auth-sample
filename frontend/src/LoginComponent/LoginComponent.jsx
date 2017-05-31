@@ -15,8 +15,9 @@ class LoginComponent extends Component {
   handleSubmit(event) {
     event.preventDefault()
     this.loginService.login(this.state.username, this.state.password)
-      .then(() => {
-      this.props.handleIsLoggedInChange(true);
+      .then((data) => {
+        let principal = data.principal;
+      this.props.handleIsLoggedInChange(true, principal);
     }).catch( (error) => {
       this.setState({ hasError: true });
     });
@@ -28,7 +29,6 @@ class LoginComponent extends Component {
     change[e.target.name] = e.target.value;
     this.setState(change);
   }
-
 
   render() {
 

@@ -31,7 +31,7 @@ class HomeComponent extends Component {
 
     const loggedInMessage = <div className="text-center text-info">principal
         <br/>
-        <p>Hello </p>
+        <p>Hello {this.props.principal}</p>
         <p>The ID is {this.state.Greeting.id}</p>
         <p>The content is {this.state.Greeting.content}</p>
       </div>

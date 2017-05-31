@@ -5,6 +5,7 @@ export default class LoginService {
     login(username, password) {
 
         let headers = new Headers();
+        headers.append('X-Requested-With', 'XMLHttpRequest');
         let basicAuth = `Basic ${this.generateUsernamePasswordBase64(username, password)}`;
         headers.append("authorization", basicAuth);
 
@@ -13,12 +14,13 @@ export default class LoginService {
             headers: headers,
             mode: 'cors',
             cache: 'default',
-            credentials: 'include'
+            credentials: 'include',
+
         };
         return fetch(Constants.API_LOGIN_ENDPOINT, request)
             .then((response) => {
                 if (response.ok) {
-                    console.log("logado");
+                    return response.json();
                 } else {
                     throw new Error("erro");
                 }
