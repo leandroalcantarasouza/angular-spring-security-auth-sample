@@ -13,7 +13,7 @@ class LogoutComponent extends Component {
     event.preventDefault()
     this.loginService.logout()
       .then(() => {
-        this.props.handleIsLoggedInChange(false);
+        this.props.handleClick(false);
     });
   }
 

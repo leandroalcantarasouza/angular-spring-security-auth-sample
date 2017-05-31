@@ -5,6 +5,7 @@ import LogoutComponent from '../LogoutComponent/LogoutComponent';
 import HomeComponent from '../HomeComponent/HomeComponent';
 import HomeMenuComponent from '../HomeMenuComponent/HomeMenuComponent';
 import OutroMenuComponent from '../OutroMenuComponent/OutroMenuComponent';
+import LoginMenuComponent from '../LoginMenuComponent/LoginMenuComponent';
 
 class App extends Component {
 
@@ -19,19 +20,20 @@ class App extends Component {
   }
 
    handleClick(event, component, menuItem) {
-    this.setState({ selectedItem: menuItem });
-    this.setState({ currentScreen: component });
+     this.setState({ selectedItem: menuItem, currentScreen: component });
    }
 
    handleMenuItemClick = (component, menuItem) => {
-    this.setState({ selectedItem: menuItem });
-    this.setState({ currentScreen: component });
+     this.setState({ selectedItem: menuItem, currentScreen: component});
   }
 
-  handleIsLoggedInChange = (isLoggedIn, principal) => {
-    this.setState({ isLoggedIn });
-    this.setState({ principal });
-    this.setState({ currentScreen: <HomeComponent isLoggedIn={this.state.isLoggedIn} principal={this.state.principal}/>});
+   handleIsLoggedInChange = (isLoggedIn, principal) => {
+    this.setState({
+      isLoggedIn : isLoggedIn,
+      principal : principal,
+      selectedItem: 'home',
+      currentScreen: <HomeComponent isLoggedIn={isLoggedIn} principal={principal} />
+    });
   }
 
   recuperaLinks(isLoggedIn) {
@@ -51,15 +53,16 @@ class App extends Component {
       </li>;*/
       links.push(link);
 
-      link = <LogoutComponent key="logout" handleIsLoggedInChange={(e) => this.handleIsLoggedInChange(e, false)} />;
+      link = <LogoutComponent key="logout" handleClick={this.handleIsLoggedInChange} />;
       links.push(link);
 
     } else {
-      let link = <li key="login" role="presentation">
+      links.push(<LoginMenuComponent key="login" handleIsLoggedInChange={this.handleIsLoggedInChange} handleClick={this.handleMenuItemClick} selectedItem={this.state.selectedItem} />);
+      /*let link = <li key="login" role="presentation">
         <a href="#" onClick={(e) => this.handleClick(e, <LoginComponent handleIsLoggedInChange={this.handleIsLoggedInChange} />)}>
           <strong>LOGIN</strong>
         </a>
-      </li>;
+      </li>;*/
       links.push(link);
     }
 
@@ -67,6 +70,17 @@ class App extends Component {
   }
 
   render() {
+
+    <div>
+      {this.state.currentPath === 'home' && <HomeComponent />}
+      {this.state.currentPath === 'login' && <LoginComponent />}
+      {/*<Route path="home" current={this.state.currentPath}>
+        <HomeComponent />
+      </Route>
+      <Route path="login" current={this.state.currentPath}>
+        <LoginComponent />
+      </Route>*/}
+    </div>
 
     return (
       <div className="totalContentWrapper" id="outer">
