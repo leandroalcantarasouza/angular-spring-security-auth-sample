@@ -3,6 +3,8 @@ import OutroComponent from '../OutroComponent/OutroComponent';
 import LoginComponent from '../LoginComponent/LoginComponent';
 import LogoutComponent from '../LogoutComponent/LogoutComponent';
 import HomeComponent from '../HomeComponent/HomeComponent';
+import HomeMenuComponent from '../HomeMenuComponent/HomeMenuComponent';
+import OutroMenuComponent from '../OutroMenuComponent/OutroMenuComponent';
 
 class App extends Component {
 
@@ -11,11 +13,18 @@ class App extends Component {
     this.state = {
       isLoggedIn: false,
       principal: '',
+      selectedItem: 'home',
       currentScreen: <HomeComponent isLoggedIn={false}/>
     }
   }
 
-   handleClick(event, component) {
+   handleClick(event, component, menuItem) {
+    this.setState({ selectedItem: menuItem });
+    this.setState({ currentScreen: component });
+   }
+
+   handleMenuItemClick = (component, menuItem) => {
+    this.setState({ selectedItem: menuItem });
     this.setState({ currentScreen: component });
   }
 
@@ -29,15 +38,17 @@ class App extends Component {
 
     let links = [];
     let link;
-    links.push(<li key="home" role="presentation"><a onClick={(e) => this.handleClick(e, <HomeComponent isLoggedIn={this.state.isLoggedIn} />)} href="#"><strong>HOME</strong></a></li>);
+    //links.push(<li key="home" role="presentation" className="active"><a onClick={(e) => this.handleClick(e, <HomeComponent isLoggedIn={this.state.isLoggedIn} />)} href="#"><strong>HOME</strong></a></li>);
+    links.push(<HomeMenuComponent key="home" handleClick={this.handleMenuItemClick} isLoggedIn={this.state.isLoggedIn} selectedItem={this.state.selectedItem} principal={this.state.principal}/>);
 
     if (isLoggedIn) {
 
-      link = <li key="outro" role="presentation">
+      links.push(<OutroMenuComponent key="outro" handleClick={this.handleMenuItemClick} selectedItem={this.state.selectedItem}/>);
+      /*link = <li key="outro" role="presentation">
         <a href="#" onClick={(e) => this.handleClick(e, <OutroComponent />)}>
           <strong>OUTRO</strong>
         </a>
-      </li>;
+      </li>;*/
       links.push(link);
 
       link = <LogoutComponent key="logout" handleIsLoggedInChange={(e) => this.handleIsLoggedInChange(e, false)} />;
