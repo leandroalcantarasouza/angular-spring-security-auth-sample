@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
 import LoginService from '../LoginComponent/LoginService';
+import { Greeting } from '../Common/Greeting'
 
-class LoginComponent extends Component {
+class HomeComponent extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      Greeting: null
+    }
+    this.loginService = new LoginService();
+  }
+
+  componentDidMount() {
+    let isLoggedIn = this.props.isLoggedIn;
+    if (isLoggedIn) {
+      this.loginService.getResource().then(data => {
+        this.setState({ Greeting: new Greeting(data) });
+      });
+    }
+
   }
 
   render() {
@@ -34,4 +49,4 @@ class LoginComponent extends Component {
   }
 }
 
-export default LoginComponent;
+export default HomeComponent;

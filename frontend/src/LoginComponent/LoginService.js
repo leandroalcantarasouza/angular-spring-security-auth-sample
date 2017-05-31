@@ -25,9 +25,21 @@ export default class LoginService {
     }
 
     logout() {
-        return fetch('/sample/api/logout', { method: 'POST' })
+        return fetch(Constants.API_LOGOUT_ENDPOINT, { method: 'POST' })
             .then((response) => this.getLogoutSuccess(response));
     }
+
+    getResource() {
+        return fetch(Constants.API_GET_RESOURCE).then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("erro");
+            }
+
+        });
+    }
+
 
     getLogoutSuccess = (response) => {
         if (response.ok) {
